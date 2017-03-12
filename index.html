@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" ng-app="todolist">
+    <head>
+        <meta charset="utf-8">
+        <title>To Do List</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="fonts/font-awesome-4.6.3/css/font-awesome.min.css"> 
+    </head>
+    <body ng-controller="TodolistCtrl">
+    
+        <div class="wrapper">
+
+            <h3> To Do List </h3>
+            <p id="notification"> "task name" and "priority" fields can not be empty!</p>
+            <form class="newBlock">
+                <div class="infoInForm">
+                    <label for="taskName"> task name </label>
+                    <input id="taskName" type="text" ng-model="taskName"/>
+                    <label for="taskDate"> start date </label>
+                    <input id="taskDate" type="date" ng-model="taskDate"/>
+                    <label for="dueDate"> due date </label>
+                    <input id="dueDate" type="date" ng-model="dueDate"/>
+                    <label for="description"> short description </label>
+                    <input id="description" type="text" maxlength="80" ng-model="description"/>
+                    <span> <b> priority: </b> </span> 
+                    <select id="prior">
+                        <option> low  </option>
+                        <option> medium </option>
+                        <option> high </option>
+                    </select>
+                </div>                    
+            </form>
+            <button class="newTask" ng-click="addTask()"> Add new task </button>
+            <div class="tasks"> 
+                <ul class="tasksToDo">
+                    <h4>to do </h4>
+                    <li ng-repeat="task in blockInfo | filter:'statustodo' | orderBy: 'priorId'"  > 
+                        <p> <b> task name: </b>{{task.name}} </p>
+                        <p> <b> start date: </b> {{task.date | date}} </p>
+                        <p> <b> due date: </b> {{task.duedate | date}} </p>
+                        <p> <b> description: </b>{{task.descrip}} </p>
+                        <p> <b> priority: </b> {{task.priority}} 
+                            <i class= "fa fa-exclamation-circle" ng-class="{'priorClassHigh': task.priority === ' high ', 'priorClassMedium': task.priority === ' medium ' }"> </i>
+                        </p>
+                        <div class="buttons">
+                            <button title="cancel task" class="deleteTask" ng-click="deleteTask(task)"> <i class="fa fa-times-circle"></i>  </button>
+                            <button title="move the task right" class="moveRight" ng-click="moveRight(task)">  <i class="fa  fa-arrow-circle-right"></i>  </button>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="tasksInProgress">
+                    <h4> in progress </h4>
+                    <li ng-repeat="task in blockInfo | filter:'statusinprogress' | orderBy: 'priorId' " > 
+                        <p> <b> task name: </b>{{task.name}} </p>
+                        <p> <b> start date: </b> {{task.date | date}} </p>
+                        <p> <b> due date: </b> {{task.duedate | date}} </p>
+                        <p> <b> description: </b>{{task.descrip}} </p>
+                        <p> <b> priority: </b>{{task.priority}}
+                            <i class= "fa fa-exclamation-circle" ng-class="{'priorClassHigh': task.priority === ' high ', 'priorClassMedium': task.priority === ' medium ' }"> </i>
+                        </p>
+                        <div class="buttons">
+                            <button title="cancel task" class="deleteTask" ng-click="deleteTask(task)"> <i class="fa fa-times-circle"></i>  </button>
+                             <button title="move the task left" class="moveLeft" ng-click="moveLeft(task)">  <i class="fa  fa-arrow-circle-left"></i>  </button>
+                            <button title="move the task right" class="moveRight" ng-click="moveRight(task)">  <i class="fa  fa-arrow-circle-right"></i>  </button>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="tasksTesting">
+                    <h4> testing </h4>
+                    <li ng-repeat="task in blockInfo | filter:'statustest' | orderBy: 'priorId' "> 
+                       <p> <b> task name: </b>{{task.name}} </p>
+                        <p> <b> start date: </b> {{task.date | date}} </p>
+                        <p> <b> due date: </b> {{task.duedate | date}} </p>
+                        <p> <b> description: </b>{{task.descrip}} </p>
+                        <p> <b> priority: </b>{{task.priority}} 
+                            <i class= "fa fa-exclamation-circle" ng-class="{'priorClassHigh': task.priority === ' high ', 'priorClassMedium': task.priority === ' medium ' }"> </i>
+                        </p>
+                        <div class="buttons">
+                            <button title="cancel task" class="deleteTask" ng-click="deleteTask(task)"> <i class="fa fa-times-circle"></i>  </button>
+                             <button title="move the task left" class="moveLeft" ng-click="moveLeft(task)">  <i class="fa  fa-arrow-circle-left"></i>  </button>
+                            <button title="move the task right" class="moveRight" ng-click="moveRight(task)">  <i class="fa  fa-arrow-circle-right"></i>  </button>
+
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="tasksDone">
+                    <h4> done </h4>
+                    <li ng-repeat="task in blockInfo | filter:'statusdone' | orderBy: 'priorId' "> 
+                        <p> <b> task name: </b>{{task.name}} </p>
+                        <p> <b> start date: </b> {{task.date | date}} </p>
+                        <p> <b> due date: </b> {{task.duedate | date}} </p>
+                        <p> <b> description: </b>{{task.descrip}} </p>
+                        <p> <b> priority: </b>{{task.priority}} 
+                          <i class= "fa fa-exclamation-circle" ng-class="{'priorClassHigh': task.priority === ' high ', 'priorClassMedium': task.priority === ' medium ' }"> </i>
+                        </p>
+                        <div class="buttons">
+                            <button title="move the task left" class="moveLeft" ng-click="moveLeft(task)">  <i class="fa  fa-arrow-circle-left"></i>  </button>
+                            <button title="Done! Close the task" class="doneTask" ng-click="deleteTask(task)">  <i class="fa  fa-check-circle"></i>  </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/controllers.js"></script>
+    </body>
+</html>

@@ -1,0 +1,176 @@
+
+body {
+  font-family: Garamond, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 1200px;
+  min-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.newTask {
+  width: 160px;
+  height: 40px;
+  margin: 10px auto;
+  border: 2px solid #808080;
+  border-radius: 10px;
+  font-size: 20px;
+  background: transparent;
+}
+
+.newTask:hover {
+  background: #808080;
+  color: #fff;
+}
+h4, h3 {
+  text-align: center;
+}
+h4 {
+  color: #89D9FF;
+  font-weight: bold;
+}
+
+.newBlock {
+  background: #ddd;
+  height: 60px;
+  padding: 0 5px 0 5px;
+  border-radius: 10px;
+  max-width: 1200px;
+  min-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.infoInForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoInForm label, .infoInForm span{
+  margin: 0 5px;
+}
+
+.newBlock input {
+  min-width: 100px;
+  width: 160px;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid #808080;
+} 
+
+.tasks {
+  max-width: 1200px;
+  min-width: 900px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.tasks ul  {
+  font-size: 14px;
+  margin-top: 20px;
+  overflow: hidden;
+  padding: 0;
+
+}
+.tasks ul li {
+  width: 220px;
+  max-width: 250px;
+  border-radius: 10px;
+  list-style: none;
+  margin-bottom: 10px; 
+  background: transparent;
+  border: 3px solid #808080;
+}
+.tasks li p {
+  margin: 0;
+  padding: 2px;
+  border-bottom: 1px solid #808080;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons button {
+  border:0;
+  background: transparent;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #fff;
+}
+.moveRight i, .moveLeft i {
+  color: #86FFFF;
+}
+.moveRight i:hover, .moveLeft i:hover {
+  color: #05E6FF;
+}
+
+.deleteTask i {
+  color: #FF7285;
+}
+.deleteTask i:hover {
+  color: #FF4457;
+}
+
+.doneTask i{
+  color: #B2FF89;
+}
+.doneTask i:hover{
+  color: #00FF21;
+}
+
+#notification {
+  visibility: hidden;
+  color: #FF4457;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  transition-delay: 0.5s;
+  transition: opacity 0.3s, visibility 0s linear 0.3s;
+}
+
+
+.taskForChanges {
+  position: absolute;
+  list-style: none;
+  border: 2px #808080 solid;
+  border-radius: 10px;
+  top: 300px;
+  padding-left: 0;
+}
+
+.taskForChanges input {
+  border: none;
+}
+.taskForChanges p {
+  border-bottom: 1px solid #808080;
+}
+
+#taskDate, #dueDate {
+  width: 130px;
+}
+
+select {
+  height: 30px;
+  border: 2px solid #808080;
+  border-radius: 5px;
+}
+
+.priorClassHigh {
+  color: #FF4457;
+}
+
+.priorClassMedium {
+  color:  #FFD800;
+}

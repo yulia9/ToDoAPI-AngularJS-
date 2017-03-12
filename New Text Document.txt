@@ -1,0 +1,64 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+
+var app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+var tasks = [
+  {
+    id: 1,
+    name: "statustest",
+  },
+  {
+    id: 2,
+    name: "statustest",
+  },
+  {
+    id: 3,
+    name: "statustest",
+  },
+ ];
+
+app.get('/tasks', function (request, response) {
+	response.send (tasks);
+});
+app.get('/tasks/:id', function (request, response) {
+	console.log(request.params);
+	var task = tasks.find( function (task) {
+		return task.id === Number(request.params.id);
+	})
+	response.send(task);
+});
+
+//добавление объекта в массив
+app.post('/tasks', function (request, response) {
+	var task = {
+		id: Date.now(),
+		name: request.body.name,
+	};
+	tasks.push(task);
+	response.send(task);
+} );
+
+//обновление информациипосле добавления
+app.put('/tasks/:id', function(request, response) {
+	var task = tasks.find( function (task) {
+		return task.id === Number(request.params.id);
+	})
+	task.name = request.body.name;
+	response.sendStatus(200);
+})
+
+app.delete('/tasks/:id',  function(request, response) {
+	tasks = tasks.filter(function(task) {
+		return task.id !==  Number(request.params.id)
+	})
+	response.sendStatus(200);
+})
+
+app.listen(3012, function () {
+	console.log('API started');
+
+})
