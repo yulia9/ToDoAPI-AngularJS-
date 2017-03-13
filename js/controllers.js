@@ -54,17 +54,11 @@ todolist.controller('TodolistCtrl',['$scope','$http', '$location', function($sco
     };
 
     $scope.addTask = function() {
-        var inputTaskName = document.getElementById("taskName");
         var note = document.getElementById("notification");
-        var taskDate = document.getElementById("taskDate");
-        var dueDate = document.getElementById("dueDate");
-        var description = document.getElementById("description");
         var priorityChoose = document.getElementById("prior");
-        var highPriority = document.getElementById("highPriority");
 
-        if (inputTaskName.value.length === 0 || priorityChoose.value.length === 0) {
-            note.style.visibility = 'visible';
-        } else if (inputTaskName.value.length !== 0 && priorityChoose.value.length !== 0) {
+        if ($scope.taskName != null && priorityChoose.value.length !== 0) {
+      
             var priorityId;
 
             if (priorityChoose.value === " high ") {
@@ -95,12 +89,16 @@ todolist.controller('TodolistCtrl',['$scope','$http', '$location', function($sco
             $scope.blockInfo.push(newToDoTask);
 
             note.style.visibility = 'hidden';
-            inputTaskName.value = "";
-            $scope.taskDate = "";
-            $scope.dueDate = "";
-            $scope.description = "";
+            $scope.taskName = null;
+            $scope.taskDate = null;
+            $scope.dueDate = null
+            $scope.description = null
             priorityChoose.value = "";
+        } else {
+            console.log("hello")
+            note.style.visibility = 'visible';
         }
+      
     };
 
 
@@ -112,8 +110,6 @@ todolist.controller('TodolistCtrl',['$scope','$http', '$location', function($sco
     };
 
     
-
-
 
 }]);
 
