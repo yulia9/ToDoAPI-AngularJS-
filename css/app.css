@@ -7,7 +7,7 @@ body {
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 1300px;
   min-width: 1000px;
   margin: 0 auto;
   display: flex;
@@ -16,18 +16,21 @@ body {
 }
 
 .newTask {
-  width: 160px;
-  height: 40px;
-  margin: 10px auto;
-  border: 2px solid #808080;
-  border-radius: 10px;
-  font-size: 20px;
+  border: none;
+  font-size: 23px;
   background: transparent;
+  color: #fff;
 }
 
+.taskForm p:last-child{
+ display: flex;
+ justify-content: space-around;
+  margin-top: 10px;
+}
+
+
 .newTask:hover {
-  background: #808080;
-  color: #fff;
+   color: #89D9FF;
 }
 h4, h3 {
   text-align: center;
@@ -35,8 +38,30 @@ h4, h3 {
 h4 {
   color: #89D9FF;
   font-weight: bold;
+  margin-left: 10px;
+}
+#notify {
+  position: fixed;
+  width: 300px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  background: rgba(226, 226, 226, 0.7);
+  border-radius: 3px;
+  border: 1px solid #FF7285;
+  font-size: 18px;
+  display: none;
 }
 
+#notify i {
+  cursor: pointer;
+  position: absolute;
+  right: 3px;
+  color: #808080
+}
+#notify i:hover {
+  color: #4C4C4C;
+}
 .newBlock {
   background: #ddd;
   height: 60px;
@@ -72,23 +97,24 @@ h4 {
   min-width: 1000px;
   display: flex;
   margin: 0 auto;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .tasks ul  {
   font-size: 14px;
   margin-top: 20px;
-  overflow: hidden;
   padding: 0;
+  width: 230px;
 }
 .tasks ul li {
-  width: 230px;
-  max-width: 250px;
-  border-radius: 10px;
+  width: 220px;
+  margin-left: 5px;
+  margin-right: 5px;
   list-style: none;
   margin-bottom: 10px; 
   background: transparent;
   border: 3px solid #808080;
+  overflow: hidden;
 }
 .tasks li p {
   margin: 0;
@@ -96,7 +122,108 @@ h4 {
   border-bottom: 1px solid #808080;
 }
 
-.buttons {
+.editTask {
+  background: transparent;
+  border: none;
+  float: right;
+  color: #2B00AD;
+}
+
+.editTask:hover {
+  color: #2B00F0;
+}
+
+.editBlock input {
+  border: none;
+  height: 20px;
+  color: #666666;
+}
+
+.editBlock div {
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.editBlock button {
+  background: transparent;
+  border: none;
+  color: #00CC14;
+  font-size: 20px;
+}
+
+.editBlock button:hover {
+  color: #00FF11;
+}
+
+.inEdition {
+   float: right;
+}
+
+.editBlock input:first-child {
+  width: 40px;
+}
+
+.addList {
+  color: #333;
+  width: 340px;
+  height: 135px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #A5A5A5;
+  align-self: center;
+  font-size: 15px;
+  margin-top: 30px;
+  border-bottom: 2px solid #fff;
+  padding-top: 10px;
+}
+
+.notification {
+  color: #CE2321;
+  font-weight: bold;
+}
+.redStar {
+  color: #CE2321;
+}
+.addList input{
+  width: 300px;
+  height: 28px;
+  border-radius: 5px;
+}
+
+.addList p{
+  margin: 0;
+  margin-top: 10px;
+}
+
+.addList p:last-child{
+  width:300px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+
+.taskForm {
+  width: 340px;
+  padding: 20px;
+  background: #A5A5A5;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+.taskForm input , .taskForm select{
+  width: 300px;
+  height: 28px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.taskForm p {
+  margin: 0;
+}
+
+.buttons div{
   display: flex;
   justify-content: space-around;
 }
@@ -117,6 +244,14 @@ h4 {
 
 .deleteTask i {
   color: #FF7285;
+}
+.deleteTask{
+  border:0;
+  background: transparent;
+  display: inline-block;
+}
+.listName {
+  display: inline-block;
 }
 .deleteTask i:hover {
   color: #FF4457;
