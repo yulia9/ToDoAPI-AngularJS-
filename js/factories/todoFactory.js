@@ -12,8 +12,8 @@ angular.module('todolist').factory('todoFactory',['$http', function ($http) {
             if (JSON.parse(localStorage.key(i)) !== 1234512345) {
                 tasks.push(JSON.parse (localStorage.getItem(localStorage.key(i))));
                 $http.post('/tasks', JSON.parse (localStorage.getItem(localStorage.key(i))));
-            } 
-        } 
+            }
+        }
 
     } else {
         $http.get('/tasks').success(function (data) {
@@ -97,28 +97,13 @@ angular.module('todolist').factory('todoFactory',['$http', function ($http) {
     }
 
     service.moveLeft = function (task, list, listIndex, listsLength, prevListId) {
-        task.list_id = prevListId;  
+        task.list_id = prevListId;
 
         $http.put('/tasks/' +  task.id1, task);
         localStorage.removeItem(task.id1);
         localStorage.setItem(task.id1, JSON.stringify(task));
     }
 
-    service.moveToDoneTasks = function (task) {
-        arrWithDoneTasks.push(task);
-
-        task.id2 = 'done';
-        task.list_id = 'done';
-
-        tasks.splice(tasks.indexOf(task), 1);
-        localStorage.removeItem(task.id1);
-        localStorage.setItem(task.id1, JSON.stringify(task));
-        $http.put('/tasks/' +  task.id1, task);
-       
-    }
-    service.doneTasks = function () {
-        return arrWithDoneTasks;
-    }
 
 
     return  service;

@@ -16,7 +16,7 @@ angular.module('todolist').controller('TodoCtrl', function(todoFactory) {
 
     this.updateTask = function (task) {
         todoFactory.updateTask(task, this.editingTask);
-        
+
         this.editingTask = null;
         this.isEditing = false;
     }
@@ -29,13 +29,6 @@ angular.module('todolist').controller('TodoCtrl', function(todoFactory) {
         todoFactory.moveLeft(task, list, listIndex, listsLength, prevListId);
     }
 
-    this.moveToDoneTasks = function (task) {
-        todoFactory.moveToDoneTasks(task)
-    }
-
-    this.doneTasks = function () {
-        todoFactory.doneTasks();
-    }
 
 });
 

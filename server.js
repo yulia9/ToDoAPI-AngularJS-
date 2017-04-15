@@ -99,7 +99,7 @@ app.put('/lists/:id3', function(request, response) {
             return response.sendStatus(500);
         }
         response.sendStatus(200)
-    }       
+    }
     )
 })
 
@@ -123,7 +123,7 @@ app.put('/tasks/:id1', function(request, response) {
             return response.sendStatus(500);
         }
         response.sendStatus(200)
-    }       
+    }
     )
 })
 
@@ -135,7 +135,7 @@ app.delete('/tasks/:id1',  function(request, response) {
             return response.sendStatus(500);
         }
         response.sendStatus(200)
-    }       
+    }
     )
 })
 
@@ -150,7 +150,7 @@ app.delete('/tasks', function(request, response) {
             return response.sendStatus(500);
         }
         response.sendStatus(200)
-        }       
+        }
     )
 });
 
@@ -164,7 +164,7 @@ app.delete('/lists', function(request, response) {
             return response.sendStatus(500);
         }
         response.sendStatus(200)
-        }       
+        }
     )
 });
 
@@ -176,7 +176,7 @@ app.delete('/lists', function(request, response) {
 //             return response.sendStatus(500);
 //         }
 //         response.sendStatus(200)
-//     }       
+//     }
 //     )
 // })
 
@@ -196,7 +196,7 @@ MongoClient.connect('mongodb://todoUser:todoUserPassword@ds127190.mlab.com:27190
         return console.log(err);
     }
     db = database;
-    app.listen(8080, function () {
+    app.listen(8000, function () {
         console.log('API started');
     })
 })

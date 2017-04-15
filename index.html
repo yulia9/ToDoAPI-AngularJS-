@@ -5,24 +5,25 @@
         <title>To Do List</title>
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="css/app.css">
-        <link rel="stylesheet" href="fonts/font-awesome-4.6.3/css/font-awesome.min.css"> 
+        <link rel="stylesheet" href="fonts/font-awesome-4.6.3/css/font-awesome.min.css">
     </head>
-    <body> 
-        
-
-    <a href="#/">Main page</a>   
-    <a href="#/doneTasks">Done tasks</a>
+    <body>
 
 
-    <div class="wrapper" ng-controller="ListCtrl as ListCtrl"> 
+    <a href="#/">Main page</a>
+    <a href="#/doneTasks">Backlog</a>
+
+    <ng-view> </ng-view>
+
+    <div class="wrapper" ng-controller="ListCtrl as ListCtrl">
 
         <form class="addList" ng-submit="ListCtrl.addNewList()">
             <div ng-click="ListCtrl.notify()" warning-message="Maximum 5 lists can be added"> </div>
             <p ng-if="!ListCtrl.listNamePresence" class="notification"> Please, add list name! </p>
             <p ng-if="ListCtrl.listNamePresence"> <b> list name </b> </p>
-           
+
             <p> <input id="listName" type="text" ng-model="ListCtrl.listName"/> </p>
-            <p>  <button class="newTask" > 
+            <p>  <button class="newTask" >
                     <i class="fa fa-plus-circle"> </i>
                 </button>
             </p>
@@ -34,7 +35,7 @@
         <div ng-if="ListCtrl.getLists().length !== 0">
 
             <div ng-if="!ListCtrl.taskAdd">
-                <form class="taskForm">
+                <form class="taskForm animation2">
                     <p> <b ng-if="ListCtrl.mandatoryFields"> * task name </b>  <b ng-if="!ListCtrl.mandatoryFields"> <span class="redStar"> * </span> task name  <span class="redStar"> is mandatory field </span> </b> <input type="text" id="taskName" maxlength="80" ng-model="ListCtrl.taskName"/> </p>
                     <p> <b ng-if="ListCtrl.mandatoryFields"> * priority </b> <b ng-if="!ListCtrl.mandatoryFields"> <span class="redStar"> * </span> priority <span class="redStar"> is mandatory field </span>  </b>
                         <select id="prior" ng-model="ListCtrl.priority">
@@ -42,13 +43,13 @@
                             <option>medium</option>
                             <option>high</option>
                         </select>
-                    </p> 
+                    </p>
                     <p>
-                        <button class="newTask" ng-click="ListCtrl.addTask(list)"> 
+                        <button class="newTask" ng-click="ListCtrl.addTask(list)">
                             <i class="fa fa-plus-circle"> </i>
                         </button>
 
-                        <button class="newTask" ng-click="ListCtrl.showTaskForm()"> 
+                        <button class="newTask" ng-click="ListCtrl.showTaskForm()">
                             <i class="fa fa-ellipsis-h"> </i>
                         </button>
                     </p>
@@ -64,7 +65,7 @@
                             <option>medium</option>
                             <option>high</option>
                         </select>
-                    </p> 
+                    </p>
                     <p> <b>choose list </b>
                         <select id="listId"  ng-options="list.id as list.listName for list in ListCtrl.getLists()" ng-model="ListCtrl.id">
                         </select>
@@ -73,7 +74,7 @@
                     <p> <b> start date </b>  <input type="date" id="date" ng-model="ListCtrl.date"/></p>
                     <p> <b> due date </b> <input type="date" id="duedate" ng-model="ListCtrl.duedate"/></p>
                     <p>
-                        <button class="newTask" ng-click="ListCtrl.addTask(list)"> 
+                        <button class="newTask" ng-click="ListCtrl.addTask(list)">
                             <i class="fa fa-plus-circle"> </i>
                         </button>
                     </p>
@@ -88,9 +89,9 @@
                 <h4 class="listName"> {{list.listName}} </h4>
                 <button title="delete list" class="deleteTask" ng-click="ListCtrl.deleteList(list)"> <i class="fa fa-times-circle"></i>  </button>
 
-                <li ng-repeat="task in ListCtrl.getTasks(list) | filter: list.id | orderBy: 'ListCtrl.priority'" ng-controller="TodoCtrl as TodoCtrl">
-                    
-                        
+                <li class="animation" ng-repeat="task in ListCtrl.getTasks(list) | filter: list.id | orderBy: 'ListCtrl.priority'" ng-controller="TodoCtrl as TodoCtrl">
+
+
 
                     <div ng-if="!TodoCtrl.isEditing">
                         <button ng-click="TodoCtrl.editTask(task)" class="editTask fa fa-pencil"> </button>
@@ -98,19 +99,19 @@
                         <p> <b> description: </b>{{task.descrip}} </p>
                         <p> <b> start date: </b> {{task.date | date}} </p>
                         <p> <b> due date: </b> {{task.duedate | date}} </p>
-                        <p> <b> priority: </b> {{task.priority}} 
-                            <i class= "fa fa-exclamation-circle" ng-class="{'priorClassHigh': task.priority === 'high', 'priorClassMedium': task.priority === 'medium' }"> </i> 
+                        <p> <b> priority: </b> {{task.priority}}
+                            <i class= "fa fa-exclamation-circle" ng-class="{'priorClassHigh': task.priority === 'high', 'priorClassMedium': task.priority === 'medium' }"> </i>
                         </p>
-                       
+
 
                         <div class="buttons">
-                                
+
                             <div ng-if="listIndex == 0 && ListCtrl.getLists().length == 1">
 
                                 <button title="cancel task" class="deleteTask" ng-click="TodoCtrl.deleteTask(task)"> <i class="fa fa-times-circle"></i> </button>
 
-                                 <button title="Done! Close the task" class="doneTask" ng-click="TodoCtrl.moveToDoneTasks(task)">  <i class="fa  fa-check-circle"></i>  </button>
-                            
+                                 <button title="Done! Close the task" class="doneTask" n ng-click="TodoCtrl.deleteTask(task)">  <i class="fa  fa-check-circle"></i>  </button>
+
                             </div>
 
                             <div ng-if="listIndex == 0 && ListCtrl.getLists().length > 1">
@@ -118,8 +119,8 @@
                                 <button title="cancel task" class="deleteTask" ng-click="TodoCtrl.deleteTask(task)"> <i class="fa fa-times-circle"></i> </button>
                                 <button title="move the task right" class="moveRight" ng-click="TodoCtrl.moveRight(task, list, listIndex, ListCtrl.getLists().length, ListCtrl.getLists()[listIndex+1].id)">  <i class="fa  fa-arrow-circle-right"></i> </button>
 
-                                 <button title="Done! Close the task" class="doneTask" ng-click="TodoCtrl.moveToDoneTasks(task)">  <i class="fa  fa-check-circle"></i>  </button>
-                            
+                                 <button title="Done! Close the task" class="doneTask"  ng-click="TodoCtrl.deleteTask(task)">  <i class="fa  fa-check-circle"></i>  </button>
+
                             </div>
 
                              <div ng-if="ListCtrl.getLists().length > 2 && listIndex != 0 && listIndex < ListCtrl.getLists().length-1" >
@@ -128,8 +129,8 @@
                                 <button title="move the task left" class="moveLeft"  ng-click="TodoCtrl.moveLeft(task, list, listIndex, ListCtrl.getLists().length, ListCtrl.getLists()[listIndex-1].id)">  <i class="fa  fa-arrow-circle-left"></i>  </button>
                                 <button title="move the task right" class="moveRight" ng-click="TodoCtrl.moveRight(task, list, listIndex, ListCtrl.getLists().length, ListCtrl.getLists()[listIndex+1].id)">  <i class="fa  fa-arrow-circle-right"></i>  </button>
 
-                                 <button title="Done! Close the task" class="doneTask" ng-click="TodoCtrl.moveToDoneTasks(task)">  <i class="fa  fa-check-circle"></i>  </button>
-                            
+                                 <button title="Done! Close the task" class="doneTask" ng-click="TodoCtrl.deleteTask(task)">  <i class="fa  fa-check-circle"></i>  </button>
+
                             </div>
 
 
@@ -138,8 +139,8 @@
                                 <button title="cancel task" class="deleteTask" ng-click="TodoCtrl.deleteTask(task)"> <i class="fa fa-times-circle"></i> </button>
                                 <button title="move the task left" class="moveLeft"  ng-click="TodoCtrl.moveLeft(task, list, listIndex, ListCtrl.getLists().length, ListCtrl.getLists()[listIndex-1].id)">  <i class="fa  fa-arrow-circle-left"></i>  </button>
 
-                                <button title="Done! Close the task" class="doneTask" ng-click="TodoCtrl.moveToDoneTasks(task)">  <i class="fa  fa-check-circle"></i>  </button>
-                            
+                                <button title="Done! Close the task" class="doneTask"  ng-click="TodoCtrl.deleteTask(task)">  <i class="fa  fa-check-circle"></i>  </button>
+
                             </div>
 
                         </div>
@@ -160,13 +161,13 @@
                         <form ng-submit="TodoCtrl.updateTask(task)">
                             <p> <b> start date: </b>  <input type="date" ng-model="TodoCtrl.editingTask.date"/>  </p>
                         </form>
-                        
+
                         <form ng-submit="TodoCtrl.updateTask(task)">
                             <p> <b> due date: </b>  <input type="date" ng-model="TodoCtrl.editingTask.duedate"/>  </p>
                         </form>
-                        
+
                         <form ng-submit="TodoCtrl.updateTask(task)">
-                            <p> <b> priority: </b>  
+                            <p> <b> priority: </b>
                                <select id="prior" ng-model="TodoCtrl.editingTask.priority">
                                     <option>low</option>
                                     <option>medium</option>
@@ -174,18 +175,18 @@
                                </select>
                             </p>
                         </form>
-                       
+
                          <div>  <button ng-click="TodoCtrl.updateTask(task)" class="inEdition fa  fa-check"> </button> </div>
-                        
+
                     </div>
 
-                </li> 
+                </li>
             </ul>
         </div>
 
     </div>
 
-    <ng-view> </ng-view>
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
@@ -197,7 +198,7 @@
     <script src="js/controllers/ListCtrl.js"></script>
     <script src="js/controllers/TodoCtrl.js"></script>
     <script src="js/directives/warningComponent.js"></script>
-    
+
 
     </body>
 </html>

@@ -13,11 +13,20 @@ angular.module('todolist', ["ngRoute"])
 });
 
 
-angular.module('todolist').controller('doneTasksCtrl', function(todoFactory) {
+angular.module('todolist').controller('doneTasksCtrl', function() {
 
-   this.submit = function () {
-        var username = this.username;
-        var password = this.password;
+    var ulForBacklog = angular.element(document.getElementById("backlogUl"));
+
+    this.backlogTasks = [];
+
+    this.addTask = function (e) {
+        e.preventDefault();
+        if (this.todoInTheFuture.length !== 0) {
+            // localStorage.setItem('000' + this.todoInTheFuture.substring(0,3), JSON.stringify(this.todoInTheFuture));
+            this.backlogTasks.push(this.todoInTheFuture);
+            this.todoInTheFuture = "";
+
+        }
    }
 
 });
@@ -29,4 +38,4 @@ angular.module('todolist').controller('doneTasksCtrl', function(todoFactory) {
 
 
 
- 
+

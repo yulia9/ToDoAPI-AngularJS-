@@ -1,8 +1,14 @@
 <div ng-controller="doneTasksCtrl as doneTasksCtrl" >
-	<form action="/" id="login">
-		Username: <input type="text" name="username" id="username">
-		Password: <input type="password" name="password" id="password">
-		<button ng-click="doneTasksCtrl.submit()"> Login</button>
+
+    <h5> <b> Backlog </b> </h5>
+	<form action="/" id="login" ng-submit="doneTasksCtrl.addTask($event)">
+		<label for="username">  </label>
+        <input type="text" name="username" id="username" ng-model="doneTasksCtrl.todoInTheFuture"/>
 	</form>
+
+    <ol id="backlogUl">
+        <li ng-repeat="task in doneTasksCtrl.backlogTasks"> {{task}} </li>
+
+    </ol>
 
 </div>
